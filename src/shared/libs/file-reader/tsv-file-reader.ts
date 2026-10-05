@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
-import { Amenity, City, HousingType, Offer, UserType } from '../../types';
-import { FileReader } from './file-reader.interface';
+import { Amenity, City, HousingType, Offer, UserType } from '../../types/index.js';
+import { FileReader } from './file-reader.interface.js';
 
 export class TSVFileReader implements FileReader {
   private rawData = '';

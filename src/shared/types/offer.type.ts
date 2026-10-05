@@ -1,7 +1,7 @@
-import { Amenity } from './amenity.enum';
-import { City } from './city.enum';
-import { HousingType } from './housing-type.enum';
-import { User } from './user.type';
+import { Amenity } from './amenity.enum.js';
+import { City } from './city.enum.js';
+import { HousingType } from './housing-type.enum.js';
+import { User } from './user.type.js';
 
 export type Coordinates = {
   latitude: number;
