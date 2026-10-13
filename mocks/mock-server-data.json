@@ -1,0 +1,74 @@
+{
+  "api": {
+    "cities": [
+      "Paris",
+      "Cologne",
+      "Brussels",
+      "Amsterdam",
+      "Hamburg",
+      "Dusseldorf"
+    ],
+    "titles": [
+      "Уютная студия в центре города",
+      "Просторные апартаменты у канала",
+      "Современный лофт с панорамным видом",
+      "Тихая комната в историческом квартале",
+      "Семейный дом с садом",
+      "Номер в бутик-отеле рядом с площадью",
+      "Апартаменты с видом на реку"
+    ],
+    "descriptions": [
+      "Светлое и уютное жильё в самом сердце города. Рядом кафе, рестораны и остановки общественного транспорта.",
+      "Просторные апартаменты с видом на канал. Всё необходимое для комфортного проживания включено.",
+      "Современный лофт с высокими потолками и большими окнами. Идеально для творческих людей.",
+      "Тихая комната в жилом доме. Отличный вариант для тех, кто ценит спокойствие и приватность.",
+      "Уютный дом с садом в тихом районе. Идеально для семей с детьми или шумных компаний."
+    ],
+    "offerImages": [
+      "apartment-01.jpg",
+      "apartment-02.jpg",
+      "house-01.jpg",
+      "room-01.jpg",
+      "hotel-01.jpg",
+      "loft-01.jpg"
+    ],
+    "users": [
+      "Анна Смирнова",
+      "Иван Петров",
+      "Marie Dupont",
+      "Jan van Berg",
+      "Klaus Müller",
+      "Sophie Laurent"
+    ],
+    "emails": [
+      "anna@rent.local",
+      "ivan@host.local",
+      "marie@paris.local",
+      "jan@amsterdam.local",
+      "klaus@hamburg.local",
+      "sophie@brussels.local"
+    ],
+    "avatars": [
+      "user-1.jpg",
+      "user-2.jpg",
+      "user-3.jpg",
+      "user-4.jpg",
+      "user-5.jpg"
+    ],
+    "housingTypes": [
+      "apartment",
+      "house",
+      "room",
+      "hotel"
+    ],
+    "amenities": [
+      "Breakfast",
+      "Air conditioning",
+      "Laptop friendly workspace",
+      "Baby seat",
+      "Washer",
+      "Towels",
+      "Fridge"
+    ]
+  }
+}
