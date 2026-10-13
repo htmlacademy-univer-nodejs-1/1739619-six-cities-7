@@ -1,13 +1,5 @@
 {
   "api": {
-    "cities": [
-      "Paris",
-      "Cologne",
-      "Brussels",
-      "Amsterdam",
-      "Hamburg",
-      "Dusseldorf"
-    ],
     "titles": [
       "Уютная студия в центре города",
       "Просторные апартаменты у канала",
@@ -54,21 +46,6 @@
       "user-3.jpg",
       "user-4.jpg",
       "user-5.jpg"
-    ],
-    "housingTypes": [
-      "apartment",
-      "house",
-      "room",
-      "hotel"
-    ],
-    "amenities": [
-      "Breakfast",
-      "Air conditioning",
-      "Laptop friendly workspace",
-      "Baby seat",
-      "Washer",
-      "Towels",
-      "Fridge"
     ]
   }
 }
