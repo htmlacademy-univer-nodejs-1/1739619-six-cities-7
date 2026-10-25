@@ -19,7 +19,7 @@ export function createOffer(offerData: string): Offer {
     userName,
     userEmail,
     userAvatar,
-    password,
+    , // password column — пропускаем, не хранится в Offer
     userType,
     commentsCount,
     coordinates,
@@ -46,7 +46,6 @@ export function createOffer(offerData: string): Offer {
       name: userName,
       email: userEmail,
       avatarPath: userAvatar || undefined,
-      password,
       type: userType as UserType,
     },
     commentsCount: Number.parseInt(commentsCount, 10),
