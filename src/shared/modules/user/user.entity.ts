@@ -15,7 +15,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({ required: true, default: '', minlength: 1, maxlength: 15 })
   public name: string;
 
-  @prop({ required: true, unique: true, match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/ })
+  @prop({ required: true, unique: true, match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/ })
   public email: string;
 
   @prop({ required: false, default: '', match: /\.(jpg|png)$/ })
@@ -24,8 +24,8 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({ required: true, type: String, enum: UserType })
   public type: UserType;
 
-  @prop({ required: true, default: '', minlength: 6, maxlength: 12 })
-  private password: string;
+  @prop({ required: true, default: '' })
+  public password: string;
 
   constructor(userData: User) {
     super();

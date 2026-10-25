@@ -21,4 +21,5 @@ export class CreateOfferDto {
   public rentPrice: number;
   public amenities: Amenity[];
   public coordinates: Coordinates;
+  public author: string;
 }

@@ -35,14 +35,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({ required: true })
   public previewImage!: string;
 
-  @prop({
-    required: true,
-    type: () => [String],
-    validate: {
-      validator: (v: string[]) => v.length === 6,
-      message: 'Images array must contain exactly 6 photos',
-    }
-  })
+  @prop({ required: true, type: () => [String] })
   public images!: string[];
 
   @prop({ required: true })

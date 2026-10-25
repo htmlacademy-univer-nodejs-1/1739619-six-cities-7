@@ -28,7 +28,7 @@ export class MongoDatabaseClient implements DatabaseClient {
       throw new Error('MongoDB client already connected');
     }
 
-    this.logger.info('Trying to connect to MongoDB…');
+    this.logger.info('Trying to connect to MongoDB');
 
     let attempt = 0;
     while (attempt < RETRY_COUNT) {
@@ -36,6 +36,7 @@ export class MongoDatabaseClient implements DatabaseClient {
         this.mongoose = await Mongoose.connect(uri);
         this.isConnected = true;
         this.logger.info('Database connection established.');
+        return;
       } catch (err) {
         attempt++;
         this.logger.error(`Failed to connect to the database. Attempt ${attempt}`, err as Error);

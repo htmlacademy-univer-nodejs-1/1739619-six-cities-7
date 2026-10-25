@@ -19,6 +19,7 @@ export function createOffer(offerData: string): Offer {
     userName,
     userEmail,
     userAvatar,
+    , // password column — пропускаем, не хранится в Offer
     userType,
     commentsCount,
     coordinates,
