@@ -10,7 +10,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - six-cities_data:/data/db
+      - six-cities_data:/data/database-client
 
   db_ui:
     image: mongo-express:latest
@@ -21,7 +21,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: test
-      ME_CONFIG_MONGODB_URL: mongodb://admin:test@db:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://admin:test@database-client:27017/
 
 volumes:
   six-cities_data:
