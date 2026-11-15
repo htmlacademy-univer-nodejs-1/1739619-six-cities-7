@@ -6,3 +6,4 @@ export { Coordinates, Offer } from './offer.type.js';
 export { Comment } from './comment.type.js';
 export { MockServerData } from './mock-server-data.type.js';
 export * from './component.enum.js';
+export * from './sort-type.enum.js';

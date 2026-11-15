@@ -3,6 +3,9 @@ import { DocumentType, ReturnModelType } from '@typegoose/typegoose';
 import { UserService } from './user-service.interface.js';
 import { UserEntity } from './user.entity.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
+import { LoginUserDto } from './dto/login-user.dto.js';
+import { UpdateUserDto } from './dto/update-user.dto.js';
+import { createSHA256 } from '../../helpers/index.js';
 import { Logger } from '../../libs/logger/index.js';
 import { Component } from '../../types/index.js';
 
@@ -14,7 +17,12 @@ export class DefaultUserService implements UserService {
   ) {}
 
   public async create(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
-    const user = new this.userModel(dto);
+    const user = new this.userModel({
+      name: dto.name,
+      email: dto.email,
+      avatarPath: dto.avatarPath,
+      type: dto.type,
+    });
     user.setPassword(dto.password, salt);
 
     const result = await user.save() as unknown as DocumentType<UserEntity>;
@@ -26,6 +34,18 @@ export class DefaultUserService implements UserService {
     return this.userModel.findOne({ email });
   }
 
+  public async findById(id: string): Promise<DocumentType<UserEntity> | null> {
+    return this.userModel.findById<DocumentType<UserEntity>>(id).exec();
+  }
+
+  public async verifyCredentials(dto: LoginUserDto, salt: string): Promise<DocumentType<UserEntity> | null> {
+    const user = await this.userModel.findOne({ email: dto.email }).select('+password').exec();
+    if (!user || user.getPassword() !== createSHA256(dto.password, salt)) {
+      return null;
+    }
+    return this.findById(user.id);
+  }
+
   public async findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const existedUser = await this.findByEmail(dto.email);
 
@@ -34,5 +54,11 @@ export class DefaultUserService implements UserService {
     }
 
     return this.create(dto, salt);
+  }
+
+  public async updateById(id: string, dto: UpdateUserDto): Promise<DocumentType<UserEntity> | null> {
+    return this.userModel.findByIdAndUpdate<DocumentType<UserEntity>>(id, {
+      $set: { name: dto.name, avatarPath: dto.avatarPath, type: dto.type },
+    }, { returnDocument: 'after' }).exec();
   }
 }

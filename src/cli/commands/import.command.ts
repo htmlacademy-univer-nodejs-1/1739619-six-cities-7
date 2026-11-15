@@ -9,15 +9,16 @@ import { Logger } from '../../shared/libs/logger/index.js';
 import { DefaultUserService } from '../../shared/modules/user/index.js';
 import { UserModel } from '../../shared/modules/user/index.js';
 import { UserService } from '../../shared/modules/user/index.js';
-import { OfferService } from '../../shared/modules/offer/index.js';
+import { DefaultOfferService } from '../../shared/modules/offer/index.js';
 import { OfferModel } from '../../shared/modules/offer/index.js';
-import { OfferServiceInterface } from '../../shared/modules/offer/index.js';
+import { OfferService } from '../../shared/modules/offer/index.js';
+import { CommentModel } from '../../shared/modules/comment/index.js';
 
 const DEFAULT_DB_PORT = '27017';
 
 export class ImportCommand implements Command {
   private userService!: UserService;
-  private offerService!: OfferServiceInterface;
+  private offerService!: OfferService;
   private readonly databaseClient: DatabaseClient;
   private readonly logger: Logger;
   private salt!: string;
@@ -51,8 +52,6 @@ export class ImportCommand implements Command {
       previewImage: offer.previewImage,
       images: offer.images,
       isPremium: offer.isPremium,
-      isFavorite: offer.isFavorite,
-      rating: offer.rating,
       housingType: offer.housingType,
       roomsCount: offer.roomsCount,
       guestsCount: offer.guestsCount,
@@ -80,7 +79,7 @@ export class ImportCommand implements Command {
 
     this.salt = salt;
     this.userService = new DefaultUserService(this.logger, UserModel);
-    this.offerService = new OfferService(this.logger, OfferModel);
+    this.offerService = new DefaultOfferService(this.logger, OfferModel, CommentModel, UserModel);
 
     await this.databaseClient.connect(uri);
 
