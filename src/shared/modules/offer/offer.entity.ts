@@ -1,6 +1,7 @@
-import { defaultClasses, getModelForClass, modelOptions, prop, Ref } from '@typegoose/typegoose';
+import { defaultClasses, DocumentType, getModelForClass, modelOptions, prop } from '@typegoose/typegoose';
 import { Types } from 'mongoose';
 import { City, HousingType, Amenity } from '../../types/index.js';
+import { UserEntity } from '../user/index.js';
 
 @modelOptions({ schemaOptions: { _id: false } })
 class Coordinates {
@@ -17,6 +18,20 @@ export interface OfferEntity extends defaultClasses.Base {}
   schemaOptions: {
     collection: 'offers',
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (_document, result) => {
+        delete result.ratingSum;
+        return result;
+      },
+    },
+    toObject: {
+      virtuals: true,
+      transform: (_document, result) => {
+        delete result.ratingSum;
+        return result;
+      },
+    },
   }
 })
 export class OfferEntity extends defaultClasses.TimeStamps {
@@ -26,7 +41,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({ required: true, minlength: 20, maxlength: 1024 })
   public description!: string;
 
-  @prop({ required: true })
+  @prop({ required: true, default: Date.now })
   public publicationDate!: Date;
 
   @prop({ required: true, type: String, enum: City })
@@ -41,11 +56,11 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({ required: true })
   public isPremium!: boolean;
 
-  @prop({ required: true })
-  public isFavorite!: boolean;
-
-  @prop({ required: true, min: 1, max: 5 })
+  @prop({ default: 0 })
   public rating!: number;
+
+  @prop({ default: 0, select: false })
+  public ratingSum!: number;
 
   @prop({ required: true, type: String, enum: HousingType })
   public housingType!: HousingType;
@@ -62,14 +77,18 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({ required: true, type: () => [String], enum: Amenity })
   public amenities!: Amenity[];
 
-  @prop({ required: true, ref: 'User' })
-  public author!: Ref<Types.ObjectId>;
+  @prop({ required: true, ref: () => UserEntity })
+  public author!: Types.ObjectId;
 
   @prop({ default: 0 })
   public commentsCount!: number;
 
   @prop({ required: true })
   public coordinates!: Coordinates;
+
+  public get isFavorite(): boolean {
+    return Boolean((this as DocumentType<OfferEntity>).$locals.isFavorite);
+  }
 }
 
 export const OfferModel = getModelForClass(OfferEntity);
